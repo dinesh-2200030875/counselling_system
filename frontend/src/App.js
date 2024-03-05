@@ -10,6 +10,10 @@ import Visitor from './components/Visitor';
 import Appointment from './components/Appointment';
 import Home from './components/Home';
 import Contactus from './components/Contactus';
+import Fetchregistration from './components/Fetchregistration';
+import SignUpSuccessful from './components/SignUpSuccess';
+import HomePage from './components/HomePage';
+
 
 
 
@@ -33,7 +37,11 @@ function App () {
           <Route path='/Addvisitor' element={<Visitor />} exact />
           <Route path='/appointment' element={<Appointment/>} exact />
           <Route path='/contactus' element={<Contactus/>} exact />
+          <Route path='/Fetchregistration' element={<Fetchregistration/>} exact />
+          <Route path='/sign-up-success' element={<SignUpSuccessful/>} exact />
+          <Route path='/home-page' element={<HomePage/>} exact />
           
+                 
          
           
 

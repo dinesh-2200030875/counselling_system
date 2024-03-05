@@ -3,15 +3,13 @@ import Hello from './Hello'
 /*import Greet from './Greet'
 import Message from './Message'*/
 import Counter from './counter'
-import Datafetch from './Datafetch'
+import HomePage from './HomePage'
 
 
 const Home = () => {
   return (
     <div>
-      <Datafetch></Datafetch>
-      <Counter/>
-    
+     <HomePage/>
     
    
     </div>

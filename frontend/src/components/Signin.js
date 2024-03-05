@@ -12,6 +12,9 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useState } from 'react';
 
 function Copyright(props) {
   return (
@@ -31,14 +34,32 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({email: '', password: ''});
+  const [errorMessage, setErrorMessage] = useState('');
+
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get('email'),
       password: data.get('password'),
     });
+    try {
+      const response = await axios.post('http://localhost:8080/login', formData);
+      const username = response.data.username;
+      console.log(response.data)
+      navigate('/home-page', {state : { username }});
+    } catch(error){
+      setErrorMessage('Invalid email or password');
+      console.log("Invalid credentials");
+
+    }
   };
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value});
+  }
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -58,6 +79,7 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
+          <Typography>{errorMessage}</Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
@@ -67,6 +89,7 @@ export default function SignIn() {
               label="Email Address"
               name="email"
               autoComplete="email"
+              onChange={handleChange}
               autoFocus
             />
             <TextField
@@ -77,6 +100,7 @@ export default function SignIn() {
               label="Password"
               type="password"
               id="password"
+              onChange={handleChange}
               autoComplete="current-password"
             />
             <FormControlLabel

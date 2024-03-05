@@ -1,4 +1,4 @@
-   import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { AppBar, Tab, Toolbar, Typography, Tabs } from '@mui/material';
 import AddHomeIcon from '@mui/icons-material/AddHome';
 import { NavLink } from 'react-router-dom';
@@ -27,7 +27,8 @@ const Header = () => {
             <Tab LinkComponent={NavLink} to='AddCounsellor' label='Add Counsellor' />
             <Tab LinkComponent={NavLink} to='Appointment' label='Appointment' />
             <Tab LinkComponent={NavLink} to='Addvisitor' label='Add visitor' />
-            <Tab LinkComponent={NavLink} to='Contactus' label='Add Contactus' />              
+            <Tab LinkComponent={NavLink} to='Contactus' label='Add Contactus' />
+            <Tab LinkComponent={NavLink} to='Fetchregistration' label='Fetchregistration' />              
 
           </Tabs>
         </Toolbar>

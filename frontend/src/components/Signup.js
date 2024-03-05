@@ -16,7 +16,8 @@ import InputLabel from '@mui/material/InputLabel';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
-import axios from 'axios'
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 
 
@@ -38,6 +39,7 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignUp() {
+  const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -54,6 +56,7 @@ export default function SignUp() {
       password: data.get('password'),
     }).then(res=>{
       console.log(res.data)
+      navigate('/sign-up-success');
     })
   };
   const [Role, setRole] = React.useState('');
