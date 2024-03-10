@@ -9,7 +9,13 @@ const Fetchregistration = () => {
   const [res, setRes] = useState([])
 
   const fetchData= async ()=>{ 
-    await axios.get('http://localhost:8080/retrive') 
+    await axios.get('http://localhost:8080/retrive',
+    {
+      headers: {
+      "authorization": `Bearer ${localStorage.getItem("token")}` ,
+      "Accept": "application/json",
+      "Content-Type": "application/json"
+    }})
     .then(response=>{ 
        setRes(response.data) 
        console.log(Response.data) 

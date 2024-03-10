@@ -1,11 +1,23 @@
 const express = require('express')
 const cors = require('cors')
 const {MongoClient,ObjectId} = require('mongodb')
+const jwt = require('jsonwebtoken');
+const {expressjwt: exjwt} = require('express-jwt')
+const jwt_decode = require('jwt-decode')
 
 const app=express()
 
 app.use(cors())
 app.use(express.json())
+
+secretkey = "abcd"
+algorithm = "HS256"
+
+const jwtmw = exjwt({
+    secret: secretkey,
+    algorithms: [algorithm]
+})
+
 const client =new MongoClient('mongodb+srv://admin:admin@cluster0.9qyfbnh.mongodb.net/?retryWrites=true&w=majority')
 client.connect()
 const db = client.db('Student')
@@ -27,8 +39,8 @@ app.post('/login', async (req, res) => {
     if(!user || !(password === user.password)){
         return res.status(401).json({message: 'Invalid email or password'});
     }
-
-    res.json({username: user.name});
+    const token = jwt.sign(user, secretkey, {algorithm: algorithm, expiresIn: '1m' });
+    res.json({ username:user.name, token: token});
     }
     else
     {
@@ -38,7 +50,8 @@ app.post('/login', async (req, res) => {
 });
 
 
-app.get('/retrive', async (req, res)=>{
+app.get('/retrive', jwtmw, async (req, res)=>{
+    //console.log(jwt_decode.jwtDecode(req.headers.authorization.substring(7)));
     const result= await col.find().toArray()
     console.log(result)
     res.send(result)

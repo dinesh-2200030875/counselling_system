@@ -26,9 +26,9 @@ const Header = () => {
             <Tab LinkComponent={NavLink} to='SignIn' label='SignIn' />
             <Tab LinkComponent={NavLink} to='AddCounsellor' label='Add Counsellor' />
             <Tab LinkComponent={NavLink} to='Appointment' label='Appointment' />
-            <Tab LinkComponent={NavLink} to='Addvisitor' label='Add visitor' />
             <Tab LinkComponent={NavLink} to='Contactus' label='Add Contactus' />
-            <Tab LinkComponent={NavLink} to='Fetchregistration' label='Fetchregistration' />              
+            <Tab LinkComponent={NavLink} to='Fetchregistration' label='Registrations' />              
+            <Tab LinkComponent={NavLink} to='/logout' label="Logout"/>              
 
           </Tabs>
         </Toolbar>
